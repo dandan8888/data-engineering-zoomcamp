@@ -86,7 +86,11 @@ Next time we run it, all the files are back.
 But, this is not _completely_ correct. The state is saved somewhere. We can see stopped containers:
 
 ```bash
-docker ps -a
+docker ps -a   #list all containers
+```
+
+```bash
+docker ps -aq   #ID of all containers
 ```
 
 We can restart one of them, but we won't do it, because it's not a good practice. They take space, so let's delete them:
@@ -95,10 +99,10 @@ We can restart one of them, but we won't do it, because it's not a good practice
 docker rm $(docker ps -aq)
 ```
 
-Next time we run something, we add `--rm`:
+Next time we run something, we add `--rm`(remove everything in the container, start fresh):
 
 ```bash
-docker run -it --rm ubuntu
+docker run -it --rm ubuntu   
 ```
 
 ## Different Base Images
@@ -113,10 +117,7 @@ docker run -it --rm python:3.9.16
 This one starts `python`. If we want bash, we need to overwrite `entrypoint`:
 
 ```bash
-docker run -it \
-    --rm \
-    --entrypoint=bash \
-    python:3.9.16-slim
+docker run -it --rm --entrypoint=bash python:3.9.16-slim
 ```
 
 ## Volumes
@@ -165,7 +166,7 @@ Check test folder path:
 echo $(pwd)/test     
 ```
 
-Now let's map this to a Python container:
+Now let's map this to a Python container(-v is bridge, link from local test file(confirmed address using wrapper $(pwd)) to app/test inside container):
 
 ```bash
 docker run -it --entrypoint=bash -v $(pwd)/test:/app/test python:3.13.11-slim
@@ -175,7 +176,7 @@ Inside the container, run:
 
 ```bash
 cd /app/test
-ls -la
+ls -la   #List all files with Long details and All hidden files
 cat file1.txt
 python list_files.py
 ```
