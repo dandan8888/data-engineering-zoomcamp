@@ -129,4 +129,36 @@ This script produces a binary (parquet) file, so let's make sure we don't accide
 *.parquet
 ```
 
+### Save to git
+
+1. Stage all changes in the current folder
+
+```bash
+git add .
+```
+
+2. Move up to the main (root) project folder
+   
+```bash
+cd ..
+```
+
+3. Stage everything again (ensures you didn't miss files in other folders)
+
+```bash
+git add .
+```
+
+4. Check which files are ready to be saved (look for green text)
+
+```bash
+git status 
+```
+
+5. Create a permanent save point with a descriptive message
+
+```bash
+git commit -m "pipeline.py"
+```
+
 **[↑ Up](README.md)** | **[← Previous](01-introduction.md)** | **[Next →](03-dockerizing-pipeline.md)**
