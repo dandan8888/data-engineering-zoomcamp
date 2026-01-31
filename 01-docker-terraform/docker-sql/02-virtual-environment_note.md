@@ -102,7 +102,7 @@ This adds pandas to your `pyproject.toml` and installs it in the virtual environ
 
 Select Interpreter (which engine to run the code):
 
-``bash
+```bash
 ./.venv/bin/python
 ```
 
