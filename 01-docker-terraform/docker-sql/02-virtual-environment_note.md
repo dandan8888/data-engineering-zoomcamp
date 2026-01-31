@@ -129,7 +129,7 @@ This script produces a binary (parquet) file, so let's make sure we don't accide
 *.parquet
 ```
 
-### Save to git
+## Save to git
 
 1. Stage all changes in the current folder
 
