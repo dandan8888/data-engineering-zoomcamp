@@ -21,7 +21,13 @@ They are used in many situations:
 - Spark: Analytics engine for large-scale data processing
 - Serverless: AWS Lambda, Google Functions
 
-## Basic Docker Commands
+ ## Basic Docker Commands
+
+List the contents of a directory:
+
+```bash
+ls
+```
 
 Check Docker version:
 
@@ -29,19 +35,20 @@ Check Docker version:
 docker --version
 ```
 
-Run a simple container:
+Run a simple container(if docker installed correctly):
 
 ```bash
 docker run hello-world
 ```
 
-Run something more complex:
+Run something more complex(starts container and back if no task there, if there is task, exit() for python, exit for bash)
+:
 
 ```bash
 docker run ubuntu
 ```
 
-Nothing happens. Need to run it in `-it` mode:
+Nothing happens. Need to run it in `-it` mode(starts and stay in container, root@containerID):
 
 ```bash
 docker run -it ubuntu
@@ -58,7 +65,7 @@ python3 -V
 
 Important: Docker containers are stateless - any changes done inside a container will NOT be saved when the container is killed and started again.
 
-When you exit the container and use it again, the changes are gone:
+When you exit(ctrl + D) the container and use it again, the changes are gone:
 
 ```bash
 docker run -it ubuntu
@@ -119,11 +126,10 @@ So, we know that with docker we can restore any container to its initial state i
 Let's create some data in `test`:
 
 ```bash
-mkdir test
-cd test
-touch file1.txt file2.txt file3.txt
-echo "Hello from host" > file1.txt
-cd ..
+mkdir test     #create folder named test
+cd test        #get inside test
+touch file1.txt file2.txt file3.txt     #create 3 empty files
+echo "Hello from host" > file1.txt      #print this to file1
 ```
 
 Now let's create a simple script `test/list_files.py` that shows the files in the folder:
@@ -147,14 +153,22 @@ for filepath in current_dir.iterdir():
         print(f"    Content: {content}")
 ```
 
+after created script.py in the test folder, execute it with python
+
+```bash
+python script.py     
+```
+
+Check test folder path:
+
+```bash
+echo $(pwd)/test     
+```
+
 Now let's map this to a Python container:
 
 ```bash
-docker run -it \
-    --rm \
-    -v $(pwd)/test:/app/test \
-    --entrypoint=bash \
-    python:3.9.16-slim
+docker run -it --entrypoint=bash -v $(pwd)/test:/app/test python:3.13.11-slim
 ```
 
 Inside the container, run:
