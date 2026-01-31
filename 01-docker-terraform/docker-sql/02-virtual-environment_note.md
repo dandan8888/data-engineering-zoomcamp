@@ -100,7 +100,9 @@ uv add pandas pyarrow
 
 This adds pandas to your `pyproject.toml` and installs it in the virtual environment.
 
-Select Interpreter (which engine to run the code):
+
+### Select Interpreter 
+Which engine to run the code:
 
 ```bash
 ./.venv/bin/python
