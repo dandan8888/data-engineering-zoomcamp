@@ -24,7 +24,7 @@ In this workshop, we'll build pipelines that:
 Let's create an example pipeline. First, create a directory `pipeline` and inside, create a file  `pipeline.py`:
 
 ```python
-import sys
+import sys    #allows Python to talk to your terminal
 print("arguments", sys.argv)
 
 day = int(sys.argv[1])
@@ -40,6 +40,12 @@ df = pd.DataFrame({"A": [1, 2], "B": [3, 4]})
 print(df.head())
 
 df.to_parquet(f"output_day_{sys.argv[1]}.parquet")
+```
+
+If pandas not found:
+
+```python
+python -m pip install {package_name}
 ```
 
 ## Why Virtual Environments?
@@ -75,11 +81,11 @@ This creates a `pyproject.toml` file for managing dependencies and a `.python-ve
 ### Comparing Python Versions
 
 ```bash
-uv run which python  # Python in the virtual environment
+uv run which python  # Where is Python in the virtual environment
 uv run python -V
 
-which python        # System Python
-python -V
+which python        # Where is System Python
+python -V           # Version
 ```
 
 You'll see they're different - `uv run` uses the isolated environment.
@@ -93,6 +99,12 @@ uv add pandas pyarrow
 ```
 
 This adds pandas to your `pyproject.toml` and installs it in the virtual environment.
+
+Select Interpreter (which engine to run the code)
+
+``bash
+./.venv/bin/python
+```
 
 ### Running the Pipeline
 
